@@ -1,8 +1,74 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Ludor es un juego de cartas privado que combina elementos del juego de cartas Culo/Presidente, póker y comodines.">
+        <meta name="keywords" content="Juego de cartas, Comodín, Ludor, Juego de cartas culo, Presidente, Poker, Juego online, Estrategia">
+        <meta name="author" content="BluePoint">
+        <meta name="robots" content="index, follow">
 
+        <!-- Open Graph / Facebook -->
+        <meta property="og:title" content="Ludor - Juego de Cartas Online">
+        <meta property="og:description" content="Ludor es un juego de cartas en línea que mezcla estrategia y diversión, combinando reglas de juegos clásicos como Culo/Presidente y Poker.">
+        <meta property="og:image" content="assets/images/ludor-thumbnail.jpg">
+        <meta property="og:url" content="https://ludor.doplerer.com">
+        <meta property="og:type" content="website">
+
+        <!-- Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Ludor - Juego de Cartas Online">
+        <meta name="twitter:description" content="Juega a Ludor, una mezcla única de Culo/Presidente y Poker con comodines estratégicos.">
+        <meta name="twitter:image" content="assets/images/ludor-thumbnail.jpg">
+        <meta name="twitter:site" content="@LudorGame">
+
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+        <script defer src="script.js"></script>
+
+        <title>Ludor - Juego de Cartas Online</title>
     </head>
     <body>
-        <h1 align="center" style="padding-top:300px;">LUDOR</h1>
+
+        <header>
+            <img th:src="@{/svg/menu.svg}">
+        </header>
+
+        <div id="gameboard">
+            <div id="gfix">
+                <!-- STARTUP PANNEL-->
+                <h1>LUDOR</h1>
+                <div id="startup">
+                    <div id="nombre">
+                        <input type="text" id="nombre" placeholder="nombre">
+                        <button id="btnNombre">Jugar</button>
+                    </div>
+
+                    <p id="dropdown" class="">...</p>
+                    
+                    <div id="partyMenu" class="off">
+                        <h4>Modo Party</h4>
+                        <input type="text" id="partyCode" placeholder="ID de la partida">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <script>
+            // dropdown party menu
+            var dropdown = document.getElementById("dropdown");
+            var partyMenu = document.getElementById("partyMenu");
+
+            dropdown.onclick = function() {
+                    dropdown.classList.add("off");
+                    partyMenu.classList.remove("off");
+            }
+
+        </script>
+            
     </body>
 </html>

@@ -1,0 +1,109 @@
+/* INDEX CSS */
+
+@font-face {
+    font-family: 'Ludor';
+    src: url('fonts/m6x11plus.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.off{
+    display: none;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background-color: #014729;
+    color: #fff;
+
+    font-family: 'Ludor', sans-serif;
+}
+
+    header {
+        position: absolute;
+
+        margin: 20px 0px 0px 10px;
+    }
+
+        header img {
+            cursor: pointer;
+        }
+
+        header img:hover {
+            rotate: 5deg;
+        }
+
+    #gameboard{
+        display: flex;
+
+        width: 100%;
+        height: 100%;
+        
+        text-align: center;
+
+    }
+
+        #gfix{
+            margin: auto;
+        }
+
+            #startup{
+                width: 350px;
+                height: auto;
+                padding: 10px;
+
+                border-radius: 8px;
+                box-shadow: #00000031 0px 4px 4px 0px;
+
+                background-color: #fff;
+            }
+
+                #startup input{
+                    padding: 10px;
+
+                    border-radius: 6px;
+                    border: none;
+                    
+                    background-color: #CCCCCC;
+                }
+
+                #startup button{
+                    padding: 10px;
+
+                    border-radius: 6px;
+                    border: none;
+                    
+                    color: #fff;
+                    background-color: #014729;
+
+                    cursor: pointer;
+                }
+                
+                #nombre{
+                    margin: 10px 0px;
+                }
+
+                #dropdown {
+                    margin: 0px 0px 5px 0px;
+                    font-size: 30px;
+                    font-weight: bold;
+                    color: #333;
+
+                    cursor: pointer;
+                }
+
+                #partyMenu{
+                    margin: 0px 0px 10px 0px;  ;
+
+                    border-top: 1px solid #C5C3C3;
+
+                    color:#333;
+                }
+
+                    #partyMenu h4{
+                        margin: 35px 0px 12px 0px;
+                    }
+
