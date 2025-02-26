@@ -1,0 +1,13 @@
+services:
+  ludor:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - ludor
+    restart: always
+
+networks:
+  ludor:
+    driver: bridge
