@@ -56,6 +56,7 @@
                     </div>
                 </div>
 
+                <div id="loader" class="loader off"></div>
 
             </div>
         </div>
@@ -79,6 +80,9 @@
             var btnNombre = document.getElementById("btnNombre");
             var nameInput = document.getElementById("name");
             var partyCode = document.getElementById("partyCode");
+            var loader = document.getElementById("loader");
+
+            nameInput.focus();
 
             // Adds animation and removes when it ends
             function animateAndRemove(element, animation){
@@ -98,6 +102,10 @@
                 }
 
                 startup_pack.classList.add("animate__animated", "animate__fadeOutUpBig");
+                setTimeout(function() {
+                    startup_pack.classList.add("off");
+                    loader.classList.remove("off");
+                }, 400);
 
                 // SEND DATA TO BACKEND
             }

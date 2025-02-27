@@ -11,6 +11,20 @@
     display: none;
 }
 
+.loader {
+    border: 8px solid #014729; /* Light grey */
+    border-top: 8px solid #212121; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 html, body{
     height: 100%;
     margin: 0;
