@@ -53,7 +53,7 @@
                         
                         <div id="partyMenu" class="off">
                             <h4>Modo Party</h4>
-                            <input type="text" id="partyCode" placeholder="ID de la partida">
+                            <input type="text" id="gameCode" placeholder="ID de la partida">
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
             var startup_pack = document.getElementById("startup-pack");
             var btnNombre = document.getElementById("btnNombre");
             var nameInput = document.getElementById("name");
-            var partyCode = document.getElementById("partyCode");
+            var gameCode = document.getElementById("gameCode");
             var loader = document.getElementById("loader");
 
             nameInput.focus();
@@ -95,7 +95,7 @@
             // Removes startup menu and sends data to bacekend
             function juegoInit () {
                 var name = nameInput.value;
-                var code = partyCode.value;
+                var code = gameCode.value;
 
                 if (name === "") {
                     animateAndRemove(startup_pack, "animate__wobble");
@@ -118,7 +118,7 @@
                     juegoInit();
                 }
             });
-            partyCode.addEventListener("keydown", function (e) {
+            gameCode.addEventListener("keydown", function (e) {
                 if (e.key === "Enter") {
                     juegoInit();
                 }
