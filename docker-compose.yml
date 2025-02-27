@@ -1,9 +1,29 @@
+version: '3.8'
+
 services:
   ludor:
     build:
       dockerfile: Dockerfile
+    container_name: ludor-app
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - redis
+    networks:
+      - ludor
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --appendonly yes  # Habilita persistencia AOF
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     networks:
       - ludor
     restart: always
@@ -11,3 +31,7 @@ services:
 networks:
   ludor:
     driver: bridge
+
+volumes:
+  redis_data:
+    driver: local
