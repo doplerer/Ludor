@@ -26,7 +26,7 @@
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
         <link rel="stylesheet" th:href="@{/css/index.css}">
-        <script defer src="script.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         <title>Ludor - Juego de Cartas Online</title>
     </head>
@@ -39,18 +39,20 @@
         <div id="gameboard">
             <div id="gfix">
                 <!-- STARTUP PANNEL-->
-                <h1>LUDOR</h1>
-                <div id="startup">
-                    <div id="nombre">
-                        <input type="text" id="nombre" placeholder="nombre">
-                        <button id="btnNombre">Jugar</button>
-                    </div>
+                 <div id="startup-pack">
+                    <h1>LUDOR</h1>
+                    <div id="startup" class="animate__animated animate__jackInTheBox">
+                        <div id="nombre">
+                            <input type="text" id="name" placeholder="nombre">
+                            <button id="btnNombre">Jugar</button>
+                        </div>
 
-                    <p id="dropdown" class="">...</p>
-                    
-                    <div id="partyMenu" class="off">
-                        <h4>Modo Party</h4>
-                        <input type="text" id="partyCode" placeholder="ID de la partida">
+                        <p id="dropdown" class="">...</p>
+                        
+                        <div id="partyMenu" class="off">
+                            <h4>Modo Party</h4>
+                            <input type="text" id="partyCode" placeholder="ID de la partida">
+                        </div>
                     </div>
                 </div>
 
@@ -58,8 +60,9 @@
             </div>
         </div>
 
-        <script>
-            // dropdown party menu
+        
+        <script> 
+            // dropdown party menu 
             var dropdown = document.getElementById("dropdown");
             var partyMenu = document.getElementById("partyMenu");
 
@@ -68,7 +71,49 @@
                     partyMenu.classList.remove("off");
             }
 
+            // Send startup data to backend
+            var startup_pack = document.getElementById("startup-pack");
+            var startup = document.getElementById("startup");
+            var btnNombre = document.getElementById("btnNombre");
+            var nombre = document.getElementById("name");
+            var partyCode = document.getElementById("partyCode");
+
+            function juegoInit () {
+                var name = nombre.value;
+                var code = partyCode.value;
+                startup_pack.classList.add("animate__animated", "animate__fadeOutUpBig");
+                
+
+                // DEBUG
+                console.log("Nombre: " + name + " Código: " + code);
+            }
+
+            btnNombre.onclick = juegoInit;
+            nombre.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    juegoInit();
+                }
+            });
+            partyCode.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    juegoInit();
+                }
+            });
+
+            var count = 0;
+            startup_pack.addEventListener("animationend", () => {
+                count++;
+                if (count > 1){
+                    startup_pack.classList.add("off"); // Oculta el elemento después de la animación
+                }else{
+                    startup.classList.remove("animate__jackInTheBox");
+                }
+                
+            });
+            
         </script>
             
     </body>
+
+
 </html>

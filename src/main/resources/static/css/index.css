@@ -51,9 +51,9 @@ html, body{
         }
 
             #startup{
-                width: 350px;
+                width: 300px;
                 height: auto;
-                padding: 10px;
+                padding: 10px 5px;
 
                 border-radius: 8px;
                 box-shadow: #00000031 0px 4px 4px 0px;
@@ -62,7 +62,7 @@ html, body{
             }
 
                 #startup input{
-                    padding: 10px;
+                    padding: 12px;
 
                     border-radius: 6px;
                     border: none;
@@ -71,7 +71,7 @@ html, body{
                 }
 
                 #startup button{
-                    padding: 10px;
+                    padding: 12px;
 
                     border-radius: 6px;
                     border: none;
