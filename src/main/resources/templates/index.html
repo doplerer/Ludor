@@ -62,7 +62,7 @@
 
         
         <script> 
-            // dropdown party menu 
+            // ### dropdown party menu 
             var dropdown = document.getElementById("dropdown");
             var partyMenu = document.getElementById("partyMenu");
 
@@ -70,26 +70,41 @@
                     dropdown.classList.add("off");
                     partyMenu.classList.remove("off");
             }
-
-            // Send startup data to backend
+        </script>
+        
+        <script>
+            // ### Send startup data to backend & animate box
             var startup_pack = document.getElementById("startup-pack");
             var startup = document.getElementById("startup");
             var btnNombre = document.getElementById("btnNombre");
-            var nombre = document.getElementById("name");
+            var nameInput = document.getElementById("name");
             var partyCode = document.getElementById("partyCode");
 
+            // Adds animation and removes when it ends
+            function animateAndRemove(element, animation){
+                element.classList.add("animate__animated", animation);
+                element.addEventListener("animationend", function() {
+                    element.classList.remove("animate__animated", animation);
+                });
+            }
+            // Removes startup menu and sends data to bacekend
             function juegoInit () {
-                var name = nombre.value;
+                var name = nameInput.value;
                 var code = partyCode.value;
-                startup_pack.classList.add("animate__animated", "animate__fadeOutUpBig");
-                
 
-                // DEBUG
-                console.log("Nombre: " + name + " Código: " + code);
+                if (name === "") {
+                    animateAndRemove(startup_pack, "animate__wobble");
+                    return 0;
+                }
+
+                startup_pack.classList.add("animate__animated", "animate__fadeOutUpBig");
+
+                // SEND DATA TO BACKEND
             }
 
+            // Event listeners para inputs
             btnNombre.onclick = juegoInit;
-            nombre.addEventListener("keydown", function (e) {
+            nameInput.addEventListener("keydown", function (e) {
                 if (e.key === "Enter") {
                     juegoInit();
                 }
@@ -98,17 +113,6 @@
                 if (e.key === "Enter") {
                     juegoInit();
                 }
-            });
-
-            var count = 0;
-            startup_pack.addEventListener("animationend", () => {
-                count++;
-                if (count > 1){
-                    startup_pack.classList.add("off"); // Oculta el elemento después de la animación
-                }else{
-                    startup.classList.remove("animate__jackInTheBox");
-                }
-                
             });
             
         </script>
