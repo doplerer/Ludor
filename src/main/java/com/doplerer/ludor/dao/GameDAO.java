@@ -14,4 +14,7 @@ public class GameDAO {
         this.redisTemplate = redisTemplate;
     }
 
+
+    // PARA EL FUTURO SI HAY QUE ESCALAR HORIZONTALMENTE
+
 }
