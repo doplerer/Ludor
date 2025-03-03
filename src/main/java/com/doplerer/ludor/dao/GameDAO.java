@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GameDAO {
 
-    private final RedisTemplate<String, Object> redisTemplate;
-
     @Autowired
-    public GameDAO(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
+    public GameDAO() {
+
     }
 
 }
