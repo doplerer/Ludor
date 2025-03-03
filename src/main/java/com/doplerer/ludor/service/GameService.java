@@ -13,6 +13,4 @@ public class  GameService {
         this.gameDAO = gameDAO;
     }
 
-    // rest
-
 }
