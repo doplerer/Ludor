@@ -18,4 +18,6 @@ public class RedisConfig {
         return redisTemplate;
     }
 
+    // PARA EL FUTURO SI HAY QUE ESCALAR HORIZONTALMENTE
+
 }

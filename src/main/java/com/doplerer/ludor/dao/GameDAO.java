@@ -12,4 +12,7 @@ public class GameDAO {
 
     }
 
+
+    // PARA EL FUTURO SI HAY QUE ESCALAR HORIZONTALMENTE
+
 }

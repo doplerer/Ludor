@@ -1,6 +1,8 @@
 package com.doplerer.ludor.controller;
 
 import com.doplerer.ludor.service.GameService;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +21,5 @@ public class GameController {
         return "index";
     }
 
-    // API del juego
-
-    // API para unirse a una partida
-    @PostMapping("/game/join")
-    @ResponseBody
-    public void unirseAPartida(@RequestParam String partyCode, @RequestParam String playerName) {
-        //gameService.joinGame(partyCode, playerName);
-    }
 
 }
