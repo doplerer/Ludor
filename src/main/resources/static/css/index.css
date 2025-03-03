@@ -67,7 +67,7 @@ html, body{
             #startup{
                 width: 300px;
                 height: auto;
-                padding: 14px 10px;
+                padding: 28px 12px 12px;
 
                 border-radius: 8px;
                 box-shadow: #00000031 0px 4px 4px 0px;
@@ -102,11 +102,11 @@ html, body{
                 }
                 
                 #nombre{
-                    margin: 10px 0px;
+                    margin: 0px 0px 20px;
                 }
 
                 #dropdown {
-                    margin: 0px 0px 5px 0px;
+                    margin: 0px 0px 0px 0px;
                     font-size: 30px;
                     font-weight: bold;
                     color: #333;
