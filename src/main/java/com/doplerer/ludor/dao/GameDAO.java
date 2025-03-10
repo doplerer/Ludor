@@ -52,7 +52,15 @@ public class GameDAO {
 
     // Adds player to a public game
     public void joinGame(Player player){
+        for (Game game : games.values()){
+            if (!game.isActive()) {
+                game.addPlayer(player);
+                return;
+            }
+        }
 
+        String uuid = createGame();
+        games.get(uuid).addPlayer(player);
     }
 
 }

@@ -6,14 +6,16 @@ import java.util.List;
 public class Game {
 
     private String id;
+    private boolean active;
     private List<Player> players;
     private Turn lastTurn;
     private int rotation;
 
 
-    public Game(String id, List<Player> players) {
+    public Game(String id) {
         this.id = id;
-        this.players = players;
+        this.active = false;
+        this.players = new ArrayList<>();
         this.lastTurn = null;
         int rotation = 0;
     }
@@ -25,11 +27,15 @@ public class Game {
         return id;
     }
 
+    public boolean isActive(){
+        return active;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
 
-    public void addPlayers(Player player){
+    public void addPlayer(Player player){
         this.players.add(player);
     }
 
