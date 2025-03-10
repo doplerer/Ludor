@@ -1,19 +1,27 @@
 package com.doplerer.ludor.model;
+import java.util.ArrayList;
+import java.util.UUID;
 
 import java.util.List;
 
 public class Player {
+    private UUID uuid;
     private String username;
     private List<Card> cards;
-    private Byte pos; // 2=Presidente 1=VicePresi 0=Neutro -1=ViceCulo -2=Culo
+    private int role; // 2=Presidente 1=VicePresi 0=Neutro -1=ViceCulo -2=Culo
 
-    public Player(String username, List<Card> cards, Byte pos) {
+    public Player(String username) {
+        this.uuid = UUID.randomUUID();
         this.username = username;
-        this.cards = cards;
-        this.pos = pos;
+        this.cards = new ArrayList<>();
+        this.role = 0;
     }
 
     // Getters & Setters
+
+    public UUID getUuid() {
+        return uuid;
+    }
 
     public String getUsername() {
         return username;
@@ -31,11 +39,11 @@ public class Player {
         this.cards = cards;
     }
 
-    public Byte getPos() {
-        return pos;
+    public int getRole() {
+        return role;
     }
 
-    public void setPos(Byte pos) {
-        this.pos = pos;
+    public void setRole(int role) {
+        this.role = role;
     }
 }
