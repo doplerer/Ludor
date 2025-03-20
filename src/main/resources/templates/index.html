@@ -27,7 +27,8 @@
         <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
         <link rel="stylesheet" th:href="@{/css/index.css}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-        <script defer src=""></script>
+
+        <script th:src="@{/js/ws.js}"></script>
 
 
         <title>Ludor - Juego de Cartas Online</title>
@@ -76,7 +77,7 @@
         </script>
         
         <script>
-            // ### Send startup data to backend & animate box
+            // ### Grab user data and stablish ws
             var startup_pack = document.getElementById("startup-pack");
             var btnNombre = document.getElementById("btnNombre");
             var nameInput = document.getElementById("name");
@@ -92,7 +93,8 @@
                     element.classList.remove("animate__animated", animation);
                 });
             }
-            // Removes startup menu and sends data to bacekend
+
+            // Removes startup menu when valid and starts ws
             function juegoInit () {
                 var name = nameInput.value;
                 var code = gameCode.value;
@@ -108,7 +110,6 @@
                     loader.classList.remove("off");
                 }, 400);
 
-                // SEND DATA TO BACKEND
             }
 
             // Event listeners para inputs

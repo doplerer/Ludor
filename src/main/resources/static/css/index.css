@@ -13,7 +13,7 @@
 
 .loader {
     border: 8px solid #014729; /* Light grey */
-    border-top: 8px solid #212121; /* Blue */
+    border-top: 8px solid #fff; /* Blue */
     border-radius: 50%;
     width: 40px;
     height: 40px;
