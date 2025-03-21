@@ -1,5 +1,6 @@
 package com.doplerer.ludor.config;
 
+import com.doplerer.ludor.model.Player;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -14,10 +15,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketHandler extends TextWebSocketHandler {
 
     private final Map<String, WebSocketSession> activeSessions = new ConcurrentHashMap<>();
+    private Player player;
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) {
+    public void afterConnectionEstablished(WebSocketSession session) throws IOException {
         activeSessions.put(session.getId(), session);
+
+        // Creación de un nuevo player con id del ws
+        player = new Player(session.getId());
+
+        TextMessage message = new TextMessage(player.getId());
+        session.sendMessage(message);
     }
 
     @Override

@@ -12,24 +12,24 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final WebSocketHandler WebSocketHandler;
+    private final WebSocketHandler webSocketHandler;
 
-    public WebSocketConfig(WebSocketHandler WebSocketHandler) {
-        this.WebSocketHandler = WebSocketHandler;
+    public WebSocketConfig(WebSocketHandler webSocketHandler) {
+        this.webSocketHandler = webSocketHandler;
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(WebSocketHandler, "/game")
-                .setAllowedOrigins("*")
-                .withSockJS(); // Si necesitas compatibilidad con navegadores antiguos
+        registry.addHandler(webSocketHandler, "/ws")
+                .setAllowedOrigins("*");
+
     }
 
     // Habilita compresión en WebSockets y HTTP
     @Bean
     public WebServerFactoryCustomizer<NettyReactiveWebServerFactory> nettyCompressionConfig() {
         return factory -> factory.addServerCustomizers(httpServer ->
-                httpServer.compress(true)
+                httpServer.compress(false)
         );
     }
 }

@@ -1,10 +1,9 @@
 // WebSocket 
-const socket = new WebSocket("ws://localhost:8080/game", ["permessage-deflate"]);
+const socket = new WebSocket("ws://localhost:8080/ws");
 
 // Evento cuando la conexión se establece
 socket.onopen = function () {
     console.log("Conectado al WebSocket");
-    socket.send(JSON.stringify({username: "Jugador1"}));
 };
 
 // Evento cuando se recibe un mensaje
