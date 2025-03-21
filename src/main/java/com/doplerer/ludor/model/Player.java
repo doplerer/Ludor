@@ -10,8 +10,9 @@ public class Player {
     private List<Card> cards;
     private int role; // 2=Presidente 1=VicePresi 0=Neutro -1=ViceCulo -2=Culo
 
-    public Player(String id) {
+    public Player(String username, String id) {
         this.id = id;
+        this.username = username;
         this.cards = new ArrayList<>();
         this.role = 0;
     }

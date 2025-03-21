@@ -1,3 +1,5 @@
+import { connectWebSocket } from './ws.js';
+
 var startup_pack = document.getElementById("startup-pack");
 var btnNombre = document.getElementById("btnNombre");
 var nameInput = document.getElementById("name");
@@ -16,7 +18,8 @@ function animateAndRemove(element, animation){
     });
 }
 
-function juegoInit () {
+// Init game and starts WS
+function gameInit() {
     var name = nameInput.value;
     var code = gameCode.value;
 
@@ -31,21 +34,22 @@ function juegoInit () {
         loader.classList.remove("off");
     }, 400);
 
+    connectWebSocket(name, code);
+
 }
 
 // Event listeners para inputs
-btnNombre.onclick = juegoInit;
+btnNombre.onclick = gameInit;
 nameInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-        juegoInit();
+        gameInit();
     }
 });
 gameCode.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-        juegoInit();
+        gameInit();
     }
 });
-
 dropdown.onclick = function() {
     dropdown.classList.add("off");
     partyMenu.classList.remove("off");

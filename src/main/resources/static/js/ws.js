@@ -1,24 +1,28 @@
-// WebSocket 
-const socket = new WebSocket("ws://localhost:8080/ws");
+let socket;
 
-// Evento cuando la conexión se establece
-socket.onopen = function () {
-    console.log("Conectado al WebSocket");
-};
+function connectWebSocket(username, partyCode) {
+    return new Promise((resolve, reject) => {
+        socket = new WebSocket("ws://localhost:8080/ws");
 
-// Evento cuando se recibe un mensaje
-socket.onmessage = function (event) {
-    console.log("Mensaje recibido:", event.data);
-};
+        socket.onopen = function () {
+            console.log("Conectado al WebSocket");
+            socket.send(JSON.stringify({ type: "JOIN", username, partyCode }));
+            resolve(socket);
+        };
 
-// Evento cuando la conexión se cierra
-socket.onclose = function () {
-    console.log("Desconectado del WebSocket");
-};
+        socket.onmessage = function (event) {
+            console.log(event.data);
+        };
 
-// Evento en caso de error
-socket.onerror = function (error) {
-    console.error("Error en WebSocket", error);
-};
+        socket.onclose = function () {
+            console.log("Desconectado del WebSocket");
+        };
 
+        socket.onerror = function (error) {
+            console.error("Error en WebSocket", error);
+            reject(error);
+        };
+    });
+}
 
+export { connectWebSocket, socket };
