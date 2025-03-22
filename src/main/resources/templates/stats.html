@@ -16,21 +16,60 @@
 
         <h1 id="header">LUDOR STATS</h1>
 
-        <div id="games">
+        <div id="games"></div>
 
-            <div class="game">
-                <div class="game-header">
-                    <h3>35647yg</h3>
-                    <div class="game-status"></div>
-                </div>
-                <div class="game-body">
+        <script>
 
+            function printData(data){
+                var gamesContainer = document.getElementById("games");
+                gamesContainer.innerHTML = "";
+
+                let games = Object.keys(data);
+                for (i = 0; i<games.length; i++){
+                    let game = data[games[i]];
+                    let id = game.id;
+                    let active = game.active
+                    let players = game.players
+                    let lastTurn = game.lastTurn
+
+                    let playerList = "";
+                    for (i=0;i<players.length;i++){
+                        playerList += "<p>" + players[i].username + "(" + players[i].id + ")</p>"
+                    }
+
+                    gamesContainer.innerHTML += 
+                    `
+                    <div class="game">
+                        <div class="game-header">
+                            <h3>` + id + ` </h3>
+                            <div class="game-status"></div>
+                        </div>
+                        <div class="game-body">
+
+                            <p><b>PLAYERS</b>:` + players.length + `</p>
+                            <div class="game-players">
+                                `
+                                + playerList +
+                                `
+                            </div>
+
+                            <p><b>LAST TURN</b>: ` + lastTurn + `</p>
+                            
+                        </div>
+                    </div> ` 
+                }
                     
 
-                </div>
-            </div>
+                }
 
-        </div>
+            setInterval(() => {
+                fetch('http://localhost:8080/api/stats')
+                    .then(response => response.json()) 
+                    .then(data => printData(data)) 
+                    .catch(error => console.error('Error:', error));
+            }, 5000);
+
+        </script>
             
     </body>
 

@@ -22,28 +22,42 @@ html, body{
     }
 
     #games{
-
+        margin: 40px 0px 0px 0px;
         display: flex;
-        width: 90%;
+        flex-wrap: wrap;
 
     }
         .game{
             width: auto;
             height: auto;
+            margin: 10px;
 
             box-shadow: 0px 4px 4px 0px #212121;
             border-radius: 6px;
         }
 
             .game-header{
-                height: 20px;
+                height: auto;
+                padding: 5px;
 
                 border-radius: 6px 6px 0px 0px;
                 background-color: #E3E3E3;
 
             }
+                .game-header h3{
+                    margin: 0px;
+                }
 
             .game-body{
                 padding: 4px;
 
             }
+
+                .game-players{
+                    font-size: 14px;
+                    margin: 0px 0px 10px 10px;
+                }
+
+                    .game-players p{
+                        margin: 5px 0px 5px 0px;
+                    }
