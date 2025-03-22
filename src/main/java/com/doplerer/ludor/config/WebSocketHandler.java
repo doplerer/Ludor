@@ -70,6 +70,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+
+        gameService.removePlayer(gameID, player);
+
         activeSessions.remove(session.getId());
     }
 }
