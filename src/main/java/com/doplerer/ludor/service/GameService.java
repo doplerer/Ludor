@@ -62,13 +62,15 @@ public class  GameService {
         return uuid;
     }
 
-    // Removes Player from game by gameID
+    // Removes Player from game by gameID & removes game if empty
     public void removePlayer(String gameID, Player player){
         if (gameDAO.gameExists(gameID)){
             Game game = gameDAO.getGame(gameID);
             game.removePlayer(player);
+            if(game.getPlayers().size()==0){
+                gameDAO.removeGame(gameID);
+            }
         }
     }
-
 
 }
