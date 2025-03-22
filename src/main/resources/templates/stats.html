@@ -20,6 +20,11 @@
 
         <script>
 
+            fetch('http://localhost:8080/api/stats')
+                .then(response => response.json()) 
+                .then(data => printData(data)) 
+                .catch(error => console.error('Error:', error));
+
             function printData(data){
                 var gamesContainer = document.getElementById("games");
                 gamesContainer.innerHTML = "";
@@ -29,12 +34,16 @@
                     let game = data[games[i]];
                     let id = game.id;
                     let active = game.active
+                    let status = "inactive";
+                    if(active){
+                        status = "active";
+                    }
                     let players = game.players
                     let lastTurn = game.lastTurn
 
                     let playerList = "";
-                    for (i=0;i<players.length;i++){
-                        playerList += "<p>" + players[i].username + "(" + players[i].id + ")</p>"
+                    for (j=0;j<players.length;j++){
+                        playerList += "<p>" + players[j].username + " (" + players[j].id + ")</p>"
                     }
 
                     gamesContainer.innerHTML += 
@@ -42,6 +51,7 @@
                     <div class="game">
                         <div class="game-header">
                             <h3>` + id + ` </h3>
+                            <div class="status `+status+`"></div>
                             <div class="game-status"></div>
                         </div>
                         <div class="game-body">
