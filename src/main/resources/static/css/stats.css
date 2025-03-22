@@ -1,0 +1,49 @@
+/* INDEX CSS */
+
+@font-face {
+    font-family: 'Ludor';
+    src: url('fonts/m6x11plus.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    color: #212121;
+
+    font-family: 'Ludor', sans-serif;
+}
+
+    #header{
+        text-align: center;
+    }
+
+    #games{
+
+        display: flex;
+        width: 90%;
+
+    }
+        .game{
+            width: auto;
+            height: auto;
+
+            box-shadow: 0px 4px 4px 0px #212121;
+            border-radius: 6px;
+        }
+
+            .game-header{
+                height: 20px;
+
+                border-radius: 6px 6px 0px 0px;
+                background-color: #E3E3E3;
+
+            }
+
+            .game-body{
+                padding: 4px;
+
+            }

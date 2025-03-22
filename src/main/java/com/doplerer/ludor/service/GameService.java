@@ -39,7 +39,7 @@ public class  GameService {
             Game game = gameDAO.getGame(gameID);
             game.addPlayer(player);
         }else{
-            gameID = createGame();
+            gameID = createGame(gameID);
             Game game = gameDAO.getGame(gameID);
             game.addPlayer(player);
         }
