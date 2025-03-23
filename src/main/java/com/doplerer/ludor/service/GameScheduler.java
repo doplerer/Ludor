@@ -12,6 +12,7 @@ import java.util.Map;
 public class GameScheduler {
     private final GameDAO gameDAO;
     private final long ACTIVATION_TIME = 10;
+    private final int MIN_PLAYERS = 2;
 
     @Autowired
     public GameScheduler(GameDAO gameDAO) {
@@ -22,7 +23,7 @@ public class GameScheduler {
     public void checkGames() {
         Map<String, Game> games = gameDAO.getGames();
         for (Game game : games.values()) {
-            game.activateGameByThreshold(ACTIVATION_TIME);
+            game.activateGameByThreshold(ACTIVATION_TIME, MIN_PLAYERS);
         }
     }
 }
