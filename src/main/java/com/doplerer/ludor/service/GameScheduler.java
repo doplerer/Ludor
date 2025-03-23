@@ -23,7 +23,10 @@ public class GameScheduler {
     public void checkGames() {
         Map<String, Game> games = gameDAO.getGames();
         for (Game game : games.values()) {
-            game.activateGameByThreshold(ACTIVATION_TIME, MIN_PLAYERS);
+            if (!game.isActive() && game.getTimeCounter() >= ACTIVATION_TIME && game.getPlayers().size()>=MIN_PLAYERS){
+                game.activateGame();
+            }
+
         }
     }
 }

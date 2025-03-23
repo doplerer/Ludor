@@ -45,10 +45,8 @@ public class Game {
         return System.currentTimeMillis()/1000 - timeCounter;
     }
 
-    public void activateGameByThreshold(long threshold, int min_players){
-        if (!active && getTimeCounter() >= threshold && players.size()>=min_players){
-            this.active = true;
-        }
+    public void activateGame(){
+        this.active = true;
     }
 
     public List<Player> getPlayers() {
