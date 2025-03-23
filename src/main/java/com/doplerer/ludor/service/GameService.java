@@ -29,6 +29,7 @@ public class  GameService {
     // Creates private Game
     public String createGame(String id){
         Game game = new Game(id);
+        game.lockGame();
         gameDAO.getGames().put(id, game);
         return id;
     }
@@ -50,7 +51,7 @@ public class  GameService {
     // Adds player to a public game
     public String joinGame(Player player){
         for (Game game : gameDAO.getGames().values()){
-            if (!game.isActive()) {
+            if (!game.isActive() && !game.isLocked()) {
                 game.addPlayer(player);
                 return game.getID();
             }

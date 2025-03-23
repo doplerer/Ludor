@@ -7,19 +7,20 @@ public class Game {
 
     private String id;
     private boolean active;
+    private boolean locked;
     private List<Player> players;
     private Turn lastTurn;
     private int rotation;
 
-
+    // Constructor
     public Game(String id) {
         this.id = id;
         this.active = false;
+        this.locked = false;
         this.players = new ArrayList<>();
         this.lastTurn = null;
         int rotation = 0;
     }
-
 
     // Getters & Setters
 
@@ -29,6 +30,14 @@ public class Game {
 
     public boolean isActive(){
         return active;
+    }
+
+    public boolean isLocked(){
+        return locked;
+    }
+
+    public void lockGame(){
+        this.locked = true;
     }
 
     public List<Player> getPlayers() {
