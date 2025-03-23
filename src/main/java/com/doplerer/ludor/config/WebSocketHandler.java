@@ -20,8 +20,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     private GameService gameService;
     private final Map<String, WebSocketSession> activeSessions = new ConcurrentHashMap<>();
-    private Player player;
-    private String gameID;
+    private final Map<String, Player> sessionPlayers = new ConcurrentHashMap<>();
+    private final Map<String, String> sessionGameIDs = new ConcurrentHashMap<>();
 
     @Autowired
     public WebSocketHandler(GameService gameService) {
@@ -37,8 +37,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
 
         String payload = message.getPayload();
-
-        // Convertir JSON a objeto con Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> jsonMap = objectMapper.readValue(payload, new TypeReference<>() {});
 
@@ -48,19 +46,24 @@ public class WebSocketHandler extends TextWebSocketHandler {
             String username = jsonMap.get("username");
             String partyCode = jsonMap.get("partyCode");
 
-            // Crea el jugador
-            player = new Player(username, session.getId());
+            // Crea el jugador y lo asocia a esta sesión
+            Player player = new Player(username, session.getId());
+            sessionPlayers.put(session.getId(), player);
 
             // Envía un mensaje de bienvenida con el ID del jugador
             session.sendMessage(new TextMessage("Username: " + username + " ID: " + player.getId()));
 
             // Añade el jugador a una partida
+            String gameID;
             if (partyCode.equals("")){
                 gameID = gameService.joinGame(player);
             }
             else{
                 gameID = gameService.joinGame(player,partyCode);
             }
+
+            // Asocia el GameID a esta sesión
+            sessionGameIDs.put(session.getId(), gameID);
 
             session.sendMessage(new TextMessage("Se ha unido a partida: " + gameID ));
 
@@ -70,8 +73,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        String sessionId = session.getId();
 
-        gameService.removePlayer(gameID, player);
+        // Recupera el jugador y el gameID asociados a esta sesión
+        Player player = sessionPlayers.remove(sessionId);
+        String gameID = sessionGameIDs.remove(sessionId);
+
+        if (player != null && gameID != null) {
+            gameService.removePlayer(gameID, player);
+        }
 
         activeSessions.remove(session.getId());
     }
