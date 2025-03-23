@@ -8,9 +8,10 @@ public class Game {
     private String id;
     private boolean active;
     private boolean locked;
+    private long timeCounter;
     private List<Player> players;
     private Turn lastTurn;
-    private int rotation;
+    private int rotation; //
 
     // Constructor
     public Game(String id) {
@@ -40,12 +41,17 @@ public class Game {
         this.locked = true;
     }
 
+    public long getTimeCounter(){
+        return System.currentTimeMillis()/1000 - timeCounter;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
 
     public void addPlayer(Player player){
         this.players.add(player);
+        this.timeCounter = System.currentTimeMillis()/1000;
     }
 
     public void removePlayer(Player player){
