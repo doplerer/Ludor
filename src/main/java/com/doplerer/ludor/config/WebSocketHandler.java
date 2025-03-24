@@ -46,14 +46,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
             String username = jsonMap.get("username");
             String partyCode = jsonMap.get("partyCode");
 
-            // Crea el jugador y lo asocia a esta sesión
+            // Create player and links it to this session
             Player player = new Player(username, session.getId());
             sessionPlayers.put(session.getId(), player);
 
-            // Envía un mensaje de bienvenida con el ID del jugador
-            session.sendMessage(new TextMessage("Username: " + username + " ID: " + player.getId()));
-
-            // Añade el jugador a una partida
+            // adds player to a game
             String gameID;
             if (partyCode.equals("")){
                 gameID = gameService.joinGame(player);
@@ -62,7 +59,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 gameID = gameService.joinGame(player,partyCode);
             }
 
-            // Asocia el GameID a esta sesión
+            // Links gameID to this session
             sessionGameIDs.put(session.getId(), gameID);
 
             session.sendMessage(new TextMessage("Se ha unido a partida: " + gameID ));
@@ -75,7 +72,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         String sessionId = session.getId();
 
-        // Recupera el jugador y el gameID asociados a esta sesión
+        // gets player and the gameID linked to this session
         Player player = sessionPlayers.remove(sessionId);
         String gameID = sessionGameIDs.remove(sessionId);
 
@@ -84,5 +81,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
         }
 
         activeSessions.remove(session.getId());
+    }
+
+    // Getters
+
+    public WebSocketSession getSession(String playerId) {
+        return activeSessions.get(playerId);
     }
 }

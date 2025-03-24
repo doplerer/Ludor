@@ -11,6 +11,7 @@ public class Game {
     private long timeCounter;
     private List<Player> players;
     private Turn lastTurn;
+    private Player currentTurn;
     private int rotation; //
 
     // Constructor
@@ -20,6 +21,7 @@ public class Game {
         this.locked = false;
         this.players = new ArrayList<>();
         this.lastTurn = null;
+        this.currentTurn = null;
         int rotation = 0;
     }
 
@@ -60,6 +62,8 @@ public class Game {
 
     public void removePlayer(Player player){
         this.players.remove(player);
+        this.timeCounter = System.currentTimeMillis()/1000;
+        this.active = false;
     }
 
     public void updateTurn(Player player, List<Card> move) {
