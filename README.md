@@ -12,5 +12,4 @@ Juego de cartas privado
 ## Authors
 
 - [@doplerer](https://www.github.com/doplerer)
-- [@jotanune](https://www.github.com/jotanune)
 
