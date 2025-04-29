@@ -74,4 +74,7 @@ public class Game {
         return lastTurn;
     }
 
+    public Player getCurrentTurn() {
+        return currentTurn;
+    }
 }

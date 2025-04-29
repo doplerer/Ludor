@@ -35,6 +35,7 @@ public class GameEngine {
 
         // Notifies players
         ws.broadcastMessage(game, new TextMessage("{\"type\": \"GAME_STARTED\", \"gameId\": \"" + game.getID() + "\"}"));
+        ws.broadcastStatus(game);
     }
 
     private void dealCards(Game game){

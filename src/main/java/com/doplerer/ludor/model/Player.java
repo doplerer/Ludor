@@ -1,4 +1,6 @@
 package com.doplerer.ludor.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -7,6 +9,7 @@ import java.util.List;
 public class Player {
     private String id;
     private String username;
+    @JsonIgnore
     private List<Card> cards;
     private int role; // 2=Presidente 1=VicePresi 0=Neutro -1=ViceCulo -2=Culo
 
@@ -33,6 +36,10 @@ public class Player {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public int getCardCount() {
+        return cards.size();
     }
 
     public void addCard(Card card) {
