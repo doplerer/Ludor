@@ -51,6 +51,7 @@ public class WebSocketService {
             if (session != null && session.isOpen()) {
                 try {
                     Map<String, Object> statusData = new HashMap<>();
+                    statusData.put("type", "STATUS");
 
                     statusData.put("playerId", player.getId());
                     statusData.put("username", player.getUsername());

@@ -1,3 +1,5 @@
+import { displayGame } from './game.js';
+
 let socket;
 
 function connectWebSocket(username, partyCode) {
@@ -5,13 +7,21 @@ function connectWebSocket(username, partyCode) {
         socket = new WebSocket("ws://localhost:8080/ws");
 
         socket.onopen = function () {
-            console.log("Conectado al WebSocket");
+            console.log("Conectado al Servidor");
             socket.send(JSON.stringify({ type: "JOIN", username, partyCode }));
             resolve(socket);
         };
 
         socket.onmessage = function (event) {
+
+            // GameStatus message
+            const data = JSON.parse(event.data);
+            if (data.type === "STATUS") {
+                displayGame(JSON.parse(event.data));
+            }else{
+                // else
             console.log(event.data);
+            }
         };
 
         socket.onclose = function () {

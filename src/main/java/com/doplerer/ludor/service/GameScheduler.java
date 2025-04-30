@@ -18,8 +18,8 @@ import java.util.Map;
 public class GameScheduler {
     private final GameDAO gameDAO;
     private final GameEngine gameEngine;
-    private final long ACTIVATION_TIME = 10;
-    private final int MIN_PLAYERS = 2;
+    private final long ACTIVATION_TIME = 1;
+    private final int MIN_PLAYERS = 3;
 
     @Autowired
     public GameScheduler(GameDAO gameDAO, GameEngine gameEngine) {
