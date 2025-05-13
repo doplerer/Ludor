@@ -26,6 +26,7 @@
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
         <link rel="stylesheet" th:href="@{/css/index.css}">
+        <link rel="stylesheet" th:href="@{/css/game.css}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         <!-- JS -->
@@ -67,7 +68,9 @@
             
 
                 <div id="game" class="off">
+
                     <div id="players">
+
                         <!-- Player 1 -->
                         <div class="player">
                             <div class="profile">
@@ -142,19 +145,21 @@
                                 <img class="card" th:src="@{/svg/cards/BACK.svg}"></img>
                             </div>
                         </div>
-                        
-                    </div>
 
+                    </div>
+                        
+                    <!-- Middle Cards -->
                     <div id="middle">
                         <img th:src="@{/svg/cards/AS.svg}"></img>
                     </div>
 
+                    <!-- User Deck and Cards -->
                     <div id="playerPanel">
 
                         <div id="deck" class="deck">
                             <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
                             <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
-                            <img class="card selected" th:src="@{/svg/cards/AS.svg}"></img>
+                            <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
                             <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
                             <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
                             <img class="card" th:src="@{/svg/cards/AS.svg}"></img>
