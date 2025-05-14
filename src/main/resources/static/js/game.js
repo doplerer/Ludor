@@ -24,7 +24,7 @@ function displayGame(data) {
         console.log(player);
 
         if (player.id ==  playerId){
-            break;
+            continue;
         }
 
         players.innerHTML += `<div class="player">
