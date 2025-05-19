@@ -2,20 +2,20 @@ package com.doplerer.ludor.model;
 
 public class Card {
 
-    private Byte id;
+    private String id;
     private short value;
     private char family;
 
 
-    public Card(int id, int value, String family) {
-        this.id = (byte) id;
+    public Card(String id, int value, String family) {
+        this.id = id;
         this.value = (short) value;
         this.family = family.charAt(0);
     }
 
     // Getters
 
-    public Byte getId() {
+    public String getId() {
         return id;
     }
 

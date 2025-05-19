@@ -11,17 +11,25 @@ function displayGame(data) {
         document.getElementById("game").classList.remove("off");
     }
 
-    // User's Data
-
+    // Display Username
     var username = data.username;
-    var playerId = data.playerId;
+    var usernameDiv = document.getElementById("username");
+    usernameDiv.textContent = username;
+
+    // Display user's cards
+    var deck = document.getElementById("deck");
+    deck.innerHTML = "";
+    for (let i=0; i<data.cards.length; i++){
+        let card = data.cards[i];
+        deck.innerHTML += `<img class="card" src="/svg/cards/${card.id}.svg">`;
+    }
     
-    // Add Players
+    // Display Players
+    var playerId = data.playerId;
     var players = document.getElementById("players");
     players.innerHTML = "";
     for (let i=0; i<data.players.length; i++){
         let player = data.players[i];
-        console.log(player);
 
         if (player.id ==  playerId){
             continue;
@@ -42,14 +50,6 @@ function displayGame(data) {
                         </div>`
 
     }
-
-    // User's Username
-    var usernameDiv = document.getElementById("username");
-    usernameDiv.textContent = username;
-
-    // Display cards
-    console.log(data.cards);
-
 
 }
 
