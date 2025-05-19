@@ -35,17 +35,18 @@ function displayGame(data) {
             continue;
         }
 
+        var cards = "";
+        for (let j=0; j<player.cardCount; j++){
+            cards += `<img class="card" src="/svg/cards/BACK.svg">`;
+        }
+
         players.innerHTML += `<div class="player">
                             <div class="profile">
                                 <img class="avatar" src="/svg/avatar.svg"></img>
                                 <div class="username">${player.username}</div>
                             </div>
                             <div class="deck">
-                                <img class="card" src="/svg/cards/BACK.svg">
-                                <img class="card" src="/svg/cards/BACK.svg">
-                                <img class="card" src="/svg/cards/BACK.svg">
-                                <img class="card" src="/svg/cards/BACK.svg">
-                                <img class="card" src="/svg/cards/BACK.svg">
+                            ${cards}
                             </div>
                         </div>`
 

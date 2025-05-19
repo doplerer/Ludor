@@ -47,6 +47,7 @@ public class GameEngine {
         for (int i = 0; i < deck.getDeck().size(); i++) {
             Player p = game.getPlayers().get(i % game.getPlayers().size());
             p.addCard(deck.getDeck().get(i));
+            p.updateCardCount();
         }
 
     }

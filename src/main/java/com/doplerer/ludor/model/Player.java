@@ -11,6 +11,7 @@ public class Player {
     private String username;
     @JsonIgnore
     private List<Card> cards;
+    private int cardCount;
     private int role; // 2=Presidente 1=VicePresi 0=Neutro -1=ViceCulo -2=Culo
 
     public Player(String username, String id) {
@@ -30,16 +31,16 @@ public class Player {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public List<Card> getCards() {
         return cards;
     }
 
+    public void updateCardCount() {
+        this.cardCount = cards.size();
+    }
+
     public int getCardCount() {
-        return cards.size();
+        return cardCount;
     }
 
     public void addCard(Card card) {
