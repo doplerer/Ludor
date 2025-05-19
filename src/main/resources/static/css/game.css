@@ -14,8 +14,8 @@
 
         }
             .profile .avatar{
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 padding: 5px;
                 border: 2px solid #212121;
                 border-radius: 50%;
@@ -23,7 +23,7 @@
             }
 
             .profile .username{
-                font-size: 15px;
+                font-size: 18px;
                 font-weight: 500;
                 -webkit-text-stroke-width: 1px;
                 -webkit-text-stroke-color: #212121;
