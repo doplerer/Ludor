@@ -7,7 +7,7 @@ Juego de cartas privado
 ## Jugar
 
 ```http
-  https://ludor.doplerer.com
+  https://playludor.com
 ```
 ## Authors
 
