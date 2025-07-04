@@ -1,6 +1,6 @@
 
 # Ludor
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Ludor is a real-time multiplayer card game built with Java (Spring Boot) and WebSockets. This application allows users to create and join private game rooms to play with friends.
 
