@@ -24,12 +24,4 @@ public class WebSocketConfig implements WebSocketConfigurer {
                 .setAllowedOrigins("*");
 
     }
-
-    // Habilita compresión en WebSockets y HTTP
-    @Bean
-    public WebServerFactoryCustomizer<NettyReactiveWebServerFactory> nettyCompressionConfig() {
-        return factory -> factory.addServerCustomizers(httpServer ->
-                httpServer.compress(false)
-        );
-    }
 }
