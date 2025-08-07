@@ -27,11 +27,14 @@ public class GameEngine {
 
     // Starts game
     public void startGame(Game game){
-        // Activate Game
+        // Activate Game instance
         game.activateGame();
 
         // Deals cards
         dealCards(game);
+
+        // Instancia turno
+        // TODO
 
         // Notifies players
         ws.broadcastMessage(game, new TextMessage("{\"type\": \"GAME_STARTED\", \"gameId\": \"" + game.getID() + "\"}"));

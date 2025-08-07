@@ -10,7 +10,7 @@ public class Game {
     private boolean locked;
     private long timeCounter;
     private List<Player> players;
-    private List<Turn> turnRecord;
+    private List<Turn> turnHistory;
     private Player currentTurn;
     private int rotation; //
 
@@ -20,7 +20,7 @@ public class Game {
         this.active = false;
         this.locked = false;
         this.players = new ArrayList<>();
-        this.turnRecord = null;
+        this.turnHistory = new ArrayList<>();
         this.currentTurn = null;
         int rotation = 0;
     }
@@ -67,11 +67,14 @@ public class Game {
     }
 
     public void updateTurn(Player player, List<Card> move) {
-        this.turnRecord.add(new Turn(player, move));
+        this.turnHistory.add(new Turn(player, move));
     }
 
     public Turn getLastTurn() {
-        return turnRecord.get(turnRecord.size() - 1);
+        if (turnHistory.isEmpty()) {
+            return null;
+        }
+        return turnHistory.get(turnHistory.size() - 1);
     }
 
     public Player getCurrentTurn() {
