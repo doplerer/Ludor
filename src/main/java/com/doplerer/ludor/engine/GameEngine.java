@@ -27,14 +27,35 @@ public class GameEngine {
 
     // Starts game
     public void startGame(Game game){
-        // Activate Game instance
+        // Activate Game instance variable
         game.activateGame();
 
         // Deals cards
         dealCards(game);
 
-        // Instancia turno
-        // TODO
+        // Checks if there are roles
+        List<Player> players = game.getPlayers();
+        int counter = 0;
+        for (int i=0; i< players.size();i++){
+            Player p = players.get(i);
+            if (p.getRole() == 0) {
+                counter++;
+            }
+        }
+        // Sets rotation if there aren't roles
+        if (counter == players.size()) {
+           game.setRotation(players.get((int) (Math.random() * players.size())).getId());
+        }
+        // Set rotation if there are roles
+        else{
+            for (int i=0; i< players.size();i++){
+                Player p = players.get(i);
+                if (p.getRole() == -2) {
+                    game.setRotation(p.getId());
+                    break;
+                }
+            }
+        }
 
         // Notifies players
         ws.broadcastMessage(game, new TextMessage("{\"type\": \"GAME_STARTED\", \"gameId\": \"" + game.getID() + "\"}"));
@@ -54,4 +75,6 @@ public class GameEngine {
         }
 
     }
+
+
 }

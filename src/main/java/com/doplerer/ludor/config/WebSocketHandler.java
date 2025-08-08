@@ -1,5 +1,8 @@
 package com.doplerer.ludor.config;
 
+import com.doplerer.ludor.dao.GameDAO;
+import com.doplerer.ludor.engine.GameEngine;
+import com.doplerer.ludor.model.Game;
 import com.doplerer.ludor.model.Player;
 import com.doplerer.ludor.service.GameService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,19 +16,25 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 
-    private GameService gameService;
+
+    private final GameService gameService;
+    private final GameEngine gameEngine;
+    private final GameDAO gameDAO;
     private final Map<String, WebSocketSession> activeSessions = new ConcurrentHashMap<>();
     private final Map<String, Player> sessionPlayers = new ConcurrentHashMap<>();
     private final Map<String, String> sessionGameIDs = new ConcurrentHashMap<>();
 
     @Autowired
-    public WebSocketHandler(GameService gameService) {
+    public WebSocketHandler(GameService gameService, GameEngine gameEngine, GameDAO gameDAO) {
         this.gameService = gameService;
+        this.gameEngine = gameEngine;
+        this.gameDAO = gameDAO;
     }
 
     @Override
@@ -63,6 +72,23 @@ public class WebSocketHandler extends TextWebSocketHandler {
             sessionGameIDs.put(session.getId(), gameID);
 
             session.sendMessage(new TextMessage("Se ha unido a partida: " + gameID ));
+
+        } else if ("MOVE".equals(type)) {
+            String gameID = jsonMap.get("gameId");
+            Game currentGame = gameDAO.getGame(gameID);
+            Player currentPlayer = sessionPlayers.get(session.getId());
+
+            // Checks if player and game exists
+            if (currentPlayer == null || currentGame == null) {
+                return;
+            }
+
+            // Checks if turn is valid and process move
+            if (Objects.equals(currentGame.getRotation(), currentPlayer.getId())){
+                gameEngine.processMove(currentGame, currentPlayer, move);
+            }
+
+
 
         }
 
