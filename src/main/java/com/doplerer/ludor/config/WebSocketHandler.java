@@ -73,7 +73,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
             // Links gameID to this session
             sessionGameIDs.put(session.getId(), gameID);
 
-            session.sendMessage(new TextMessage("Se ha unido a partida: " + gameID ));
+            session.sendMessage(new TextMessage("{\"type\": \"GAME_JOINED\", \"gameId\": \"" + gameID + "\"}"));
 
         } else if ("MOVE".equals(type)) {
             String gameID = jsonMap.get("gameId");

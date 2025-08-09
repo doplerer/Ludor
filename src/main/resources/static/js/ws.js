@@ -15,9 +15,11 @@ function connectWebSocket(username, partyCode) {
         socket.onmessage = function (event) {
 
             // GameStatus message
+            // Check if the message is a JSON string
             const data = JSON.parse(event.data);
             if (data.type === "STATUS") {
                 displayGame(JSON.parse(event.data));
+                console.log(event.data);
             }else{
                 // else
             console.log(event.data);
