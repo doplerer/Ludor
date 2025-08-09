@@ -12,7 +12,6 @@ public class Game {
     private List<Player> players;
     private List<Turn> turnHistory;
     private Player currentTurn;
-    private String rotation; //
 
     // Constructor
     public Game(String id) {
@@ -22,7 +21,6 @@ public class Game {
         this.players = new ArrayList<>();
         this.turnHistory = new ArrayList<>();
         this.currentTurn = null;
-        String rotation = "";
     }
 
     // Getters & Setters
@@ -68,7 +66,6 @@ public class Game {
 
     public void updateTurn(Player player, List<Card> move) {
         this.turnHistory.add(new Turn(player, move));
-        // TODO +1 rotation
     }
 
     public Turn getLastTurn() {
@@ -78,15 +75,15 @@ public class Game {
         return turnHistory.get(turnHistory.size() - 1);
     }
 
+    public List<Turn> getTurnHistory() {
+        return turnHistory;
+    }
+
     public Player getCurrentTurn() {
         return currentTurn;
     }
 
-    public String getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(String rotation) {
-        this.rotation = rotation;
+    public void setCurrentTurn(Player currentTurn) {
+        this.currentTurn = currentTurn;
     }
 }

@@ -33,6 +33,7 @@ public class GameEngine {
         // Deals cards
         dealCards(game);
 
+        // Determines current turn
         // Checks if there are roles
         List<Player> players = game.getPlayers();
         int counter = 0;
@@ -43,15 +44,27 @@ public class GameEngine {
             }
         }
         // Sets rotation if there aren't roles
+        // -- Person with 3 gold starts
         if (counter == players.size()) {
-           game.setRotation(players.get((int) (Math.random() * players.size())).getId());
+            Player startPlayer = null;
+            outerLoop: for (Player player : players) {
+                for (Card card : player.getCards()) {
+                    if (card.getValue() == 0) {
+                        startPlayer = player;
+                        break outerLoop;
+                    }
+                }
+            }
+
+            game.setCurrentTurn(startPlayer);
         }
         // Set rotation if there are roles
+        // -- Person with role -2 (Culo) starts
         else{
             for (int i=0; i< players.size();i++){
                 Player p = players.get(i);
                 if (p.getRole() == -2) {
-                    game.setRotation(p.getId());
+                    game.setCurrentTurn(p);
                     break;
                 }
             }
@@ -60,6 +73,16 @@ public class GameEngine {
         // Notifies players
         ws.broadcastMessage(game, new TextMessage("{\"type\": \"GAME_STARTED\", \"gameId\": \"" + game.getID() + "\"}"));
         ws.broadcastStatus(game);
+    }
+
+    public void processMove(Game game, Player player, List<Card> hand) {
+
+        // Updates game turn history
+        game.updateTurn(player, hand);
+
+        // Updates new currentTurn
+        // TODO
+
     }
 
     private void dealCards(Game game){

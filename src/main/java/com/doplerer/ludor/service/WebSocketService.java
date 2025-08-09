@@ -59,6 +59,7 @@ public class WebSocketService {
                     statusData.put("cards", player.getCards());
 
                     statusData.put("players", game.getPlayers());
+                    statusData.put("turnHistory", game.getTurnHistory());
                     statusData.put("lastTurn", game.getLastTurn());
                     statusData.put("currentTurn", game.getCurrentTurn());
 

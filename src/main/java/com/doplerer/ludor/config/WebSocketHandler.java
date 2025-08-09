@@ -2,6 +2,7 @@ package com.doplerer.ludor.config;
 
 import com.doplerer.ludor.dao.GameDAO;
 import com.doplerer.ludor.engine.GameEngine;
+import com.doplerer.ludor.model.Card;
 import com.doplerer.ludor.model.Game;
 import com.doplerer.ludor.model.Player;
 import com.doplerer.ludor.service.GameService;
@@ -15,6 +16,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -84,8 +87,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
             }
 
             // Checks if turn is valid and process move
-            if (Objects.equals(currentGame.getRotation(), currentPlayer.getId())){
-                gameEngine.processMove(currentGame, currentPlayer, move);
+            if (Objects.equals(currentGame.getCurrentTurn().getId(), currentPlayer.getId())){
+                List<Card> hand = new ArrayList<>();
+                gameEngine.processMove(currentGame, currentPlayer, hand);
             }
 
 
