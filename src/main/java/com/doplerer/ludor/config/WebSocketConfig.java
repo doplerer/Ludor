@@ -1,5 +1,6 @@
 package com.doplerer.ludor.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-
     private final WebSocketHandler webSocketHandler;
 
     public WebSocketConfig(WebSocketHandler webSocketHandler) {

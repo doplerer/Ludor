@@ -1,12 +1,9 @@
 package com.doplerer.ludor.service;
 
 import com.doplerer.ludor.config.WebSocketHandler;
-import com.doplerer.ludor.model.Card;
 import com.doplerer.ludor.model.Game;
 import com.doplerer.ludor.model.Player;
-import com.doplerer.ludor.model.Turn;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
@@ -14,7 +11,6 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service

@@ -25,13 +25,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 
-
     private final GameService gameService;
-    private final GameEngine gameEngine;
     private final GameDAO gameDAO;
     private final Map<String, WebSocketSession> activeSessions = new ConcurrentHashMap<>();
     private final Map<String, Player> sessionPlayers = new ConcurrentHashMap<>();
     private final Map<String, String> sessionGameIDs = new ConcurrentHashMap<>();
+    private final GameEngine gameEngine;
 
     @Autowired
     public WebSocketHandler(GameService gameService, GameEngine gameEngine, GameDAO gameDAO) {

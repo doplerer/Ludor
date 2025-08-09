@@ -5,24 +5,19 @@ import com.doplerer.ludor.model.Card;
 import com.doplerer.ludor.model.Deck;
 import com.doplerer.ludor.model.Game;
 import com.doplerer.ludor.model.Player;
-import com.doplerer.ludor.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.TextMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class GameEngine {
 
     private final GameDAO gameDAO;
-    private final WebSocketService ws;
 
     @Autowired
-    public GameEngine(GameDAO gameDAO, WebSocketService ws) {
+    public GameEngine(GameDAO gameDAO) {
         this.gameDAO = gameDAO;
-        this.ws = ws;
     }
 
     // Starts game
@@ -69,10 +64,6 @@ public class GameEngine {
                 }
             }
         }
-
-        // Notifies players
-        ws.broadcastMessage(game, new TextMessage("{\"type\": \"GAME_STARTED\", \"gameId\": \"" + game.getID() + "\"}"));
-        ws.broadcastStatus(game);
     }
 
     public void processMove(Game game, Player player, List<Card> hand) {

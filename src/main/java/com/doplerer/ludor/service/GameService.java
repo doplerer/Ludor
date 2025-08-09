@@ -1,6 +1,7 @@
 package com.doplerer.ludor.service;
 
 import com.doplerer.ludor.dao.GameDAO;
+import com.doplerer.ludor.engine.GameEngine;
 import com.doplerer.ludor.model.Game;
 import com.doplerer.ludor.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,12 @@ import java.util.UUID;
 @Service
 public class  GameService {
     private final GameDAO gameDAO;
+    private final GameEngine gameEngine;
 
     @Autowired
-    public GameService(GameDAO gameDAO) {
+    public GameService(GameDAO gameDAO, GameEngine gameEngine) {
         this.gameDAO = gameDAO;
+        this.gameEngine = gameEngine;
     }
 
     // Create public Game
