@@ -1,3 +1,8 @@
+import { socket } from './ws.js';
+
+// Variables globales
+let selectedCards = [];
+
 function displayGame(data) {
 
     //Disable loader if not already disabled
@@ -11,6 +16,13 @@ function displayGame(data) {
         document.getElementById("game").classList.remove("off");
     }
 
+    // Current Turn's ID
+    var currentTurn = data.currentTurn.id;
+    if (currentTurn == data.playerId) {
+        var profileImg = document.getElementById("profile").querySelector("img");
+        profileImg.classList.add("turn");
+    }
+
     // Display Username
     var username = data.username;
     var usernameDiv = document.getElementById("username");
@@ -21,7 +33,7 @@ function displayGame(data) {
     deck.innerHTML = "";
     for (let i=0; i<data.cards.length; i++){
         let card = data.cards[i];
-        deck.innerHTML += `<img class="card" src="/svg/cards/${card.id}.svg">`;
+        deck.innerHTML += `<img class="card" id="${card.id}" src="/svg/cards/${card.id}.svg">`;
     }
     
     // Display Players
@@ -31,8 +43,13 @@ function displayGame(data) {
     for (let i=0; i<data.players.length; i++){
         let player = data.players[i];
 
-        if (player.id ==  playerId){
+        if (player.id == playerId){
             continue;
+        }
+
+        var extra = ""
+        if (currentTurn == player.id) {
+            var extra = "turn";
         }
 
         var cards = "";
@@ -42,7 +59,7 @@ function displayGame(data) {
 
         players.innerHTML += `<div class="player">
                             <div class="profile">
-                                <img class="avatar" src="/svg/avatar.svg"></img>
+                                <img class="avatar ${extra}" src="/svg/avatar.svg"></img>
                                 <div class="username">${player.username}</div>
                             </div>
                             <div class="deck">
@@ -52,6 +69,53 @@ function displayGame(data) {
 
     }
 
+
+
+
+
+    // Display cards on table (TurnHistory)
+    var middle = document.getElementById("middle");
+    var turnHistory = data.turnHistory;
+    middle.innerHTML = "";
+    for (let i=0; i<turnHistory.length; i++){
+        let turn = turnHistory[i];
+        middle.innerHTML += `<img src="/svg/cards/${turn.move.id}.svg">`;
+    }
+
+    // Evento para seleccionar carta/s
+    deck.addEventListener('click', function(event) {
+        if (event.target.classList.contains('card')) {
+            selectCard(event.target);
+        }
+    });
+
 }
+// Function to select or deselect a card
+function selectCard(cardElement) {
+    const cardId = cardElement.id;
+
+    if (cardElement.classList.contains('selected')) {
+        // Deseleccionar carta
+        cardElement.classList.remove('selected');
+        selectedCards = selectedCards.filter(id => id !== cardId);
+    } else {
+        // Seleccionar carta
+        cardElement.classList.add('selected');
+        selectedCards.push(cardId);
+    }
+}
+
+// Function process turn
+function processTurn() {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({ type: "hand", selectedCards}));
+    } else {
+        console.error("WebSocket is not open. Cannot send move.");
+    }
+}
+
+// EVENTOS
+
+
 
 export { displayGame };

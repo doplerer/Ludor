@@ -88,7 +88,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
             // Checks if turn is valid and process move
             if (Objects.equals(currentGame.getCurrentTurn().getId(), currentPlayer.getId())){
                 List<Card> hand = new ArrayList<>();
+                hand = objectMapper.readValue(jsonMap.get("hand"), new TypeReference<>() {});
                 gameEngine.processMove(currentGame, currentPlayer, hand);
+            }
+            else{
+                session.sendMessage(new TextMessage("{\"type\": \"INVALID_TURN\", \"message\": \"It's not your turn!\"}"));
             }
 
 
