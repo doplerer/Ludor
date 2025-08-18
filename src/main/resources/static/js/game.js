@@ -31,8 +31,12 @@ function displayGame(data) {
     // Display user's cards
     var deck = document.getElementById("deck");
     deck.innerHTML = "";
-    for (let i=0; i<data.cards.length; i++){
-        let card = data.cards[i];
+
+    // sort cards by card value
+    let sortedCards = [...data.cards].sort((a, b) => a.value - b.value);
+
+    for (let i=0; i<sortedCards.length; i++){
+        let card = sortedCards[i];
         deck.innerHTML += `<img class="card" id="${card.id}" src="/svg/cards/${card.id}.svg">`;
     }
     
