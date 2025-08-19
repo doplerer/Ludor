@@ -18,10 +18,8 @@ function displayGame(data) {
 
     // Current Turn's ID
     var currentTurn = data.currentTurn.id;
-    if (currentTurn == data.playerId) {
-        var profileImg = document.getElementById("profile").querySelector("img");
-        profileImg.classList.add("turn");
-    }
+
+    // --- USER ---
 
     // Display Username
     var username = data.username;
@@ -39,7 +37,19 @@ function displayGame(data) {
         let card = sortedCards[i];
         deck.innerHTML += `<img class="card" id="${card.id}" src="/svg/cards/${card.id}.svg">`;
     }
-    
+
+    // if user's turn, highlight profile image and enable buttons
+    if (currentTurn == data.playerId) {
+        var profileImg = document.getElementById("profile").querySelector("img");
+        profileImg.classList.add("turn");
+        deck.innerHTML += `<div id="controls">
+                                 <button id="btnPlay">Jugar</button>
+                                 <button id="btnPass">Pasar</button>
+                             </div>`;
+    }
+
+    // --- OTHER PLAYERS ---
+
     // Display Players
     var playerId = data.playerId;
     var players = document.getElementById("players");
@@ -74,7 +84,7 @@ function displayGame(data) {
     }
 
 
-
+    // --- GAME CONTROLS AND BOARD---
 
 
     // Display cards on table (TurnHistory)
