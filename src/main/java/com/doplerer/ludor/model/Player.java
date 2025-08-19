@@ -47,6 +47,15 @@ public class Player {
         this.cards.add(card);
     }
 
+    public Boolean hasCards(List<Card> cards) {
+        for (Card card : cards) {
+            if (!this.cards.contains(card)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public int getRole() {
         return role;
     }

@@ -87,12 +87,28 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
             // Checks if turn is valid and process move
             if (Objects.equals(currentGame.getCurrentTurn().getId(), currentPlayer.getId())){
-                List<Card> hand = new ArrayList<>();
-                hand = objectMapper.readValue(jsonMap.get("hand"), new TypeReference<>() {});
-                gameEngine.processMove(currentGame, currentPlayer, hand);
+
+                String action  = objectMapper.readValue(jsonMap.get("action"), new TypeReference<>() {});
+                List<Card> hand = objectMapper.readValue(jsonMap.get("hand"), new TypeReference<>() {});
+
+                // Checks if hand is valid
+                if (hand == null || hand.isEmpty()){
+                    session.sendMessage(new TextMessage("{\"type\": \"ERROR\", \"message\": \"Invalid hand!\"}"));
+                    return;
+                }
+
+                // Checks if player has the cards in hand
+                if (!currentPlayer.hasCards(hand)) {
+                    session.sendMessage(new TextMessage("{\"type\": \"ERROR\", \"message\": \"You don't have the cards in hand!\"}"));
+                    return;
+                }
+
+                gameEngine.processMove(currentGame, currentPlayer, action, hand);
+
+
             }
             else{
-                session.sendMessage(new TextMessage("{\"type\": \"INVALID_TURN\", \"message\": \"It's not your turn!\"}"));
+                session.sendMessage(new TextMessage("{\"type\": \"ERROR\", \"message\": \"It's not your turn!\"}"));
             }
 
 

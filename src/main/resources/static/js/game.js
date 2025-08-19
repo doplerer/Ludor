@@ -43,8 +43,8 @@ function displayGame(data) {
         var profileImg = document.getElementById("profile").querySelector("img");
         profileImg.classList.add("turn");
         deck.innerHTML += `<div id="controls">
-                                 <button id="btnPlay">Jugar</button>
-                                 <button id="btnPass">Pasar</button>
+                                 <button id="btnPlay" onclick="processTurn()">Jugar</button>
+                                 <button id="btnPass" onclick="processTurn('pass')">Pasar</button>
                              </div>`;
     }
 
@@ -120,9 +120,28 @@ function selectCard(cardElement) {
 }
 
 // Function process turn
-function processTurn() {
+function processTurn(action) {
     if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({ type: "hand", selectedCards}));
+
+        // -- PASS --
+        if (action === 'pass') {
+            socket.send(JSON.stringify({ type: "MOVE", action: "pass", selectedCards: [] }));
+            return;
+        }
+
+        // -- PLAY --
+        if (selectedCards.length === 0) {
+            console.error("No cards selected. Please select at least one card to play.");
+            return;
+        }
+
+        // Send the selected cards to the server
+        socket.send(JSON.stringify({ type: "MOVE", action:"play", selectedCards}));
+
+        // Clear selected cards for next turn
+        const selectedCardsCopy = [...selectedCards];
+        selectedCards = [];
+
     } else {
         console.error("WebSocket is not open. Cannot send move.");
     }

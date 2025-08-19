@@ -66,13 +66,12 @@ public class GameEngine {
         }
     }
 
-    public void processMove(Game game, Player player, List<Card> hand) {
+    public void processMove(Game game, Player player, String action, List<Card> hand) {
 
         // Updates game turn history
         game.updateTurn(player, hand);
 
         // Updates new currentTurn
-        // TODO
 
     }
 
